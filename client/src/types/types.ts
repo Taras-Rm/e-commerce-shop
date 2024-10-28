@@ -14,6 +14,8 @@ export type CategoryI = {
   parent?: CategoryI;
   parentId: number;
   subCategories: CategoryI[];
+
+  productsCount: number;
 };
 
 export type ProductI = {

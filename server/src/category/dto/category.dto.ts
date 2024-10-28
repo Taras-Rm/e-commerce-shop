@@ -18,4 +18,7 @@ export class CategoryDto {
 
   @ApiProperty({ type: () => [CategoryDto] })
   subCategories: CategoryDto[];
+
+  @ApiProperty({ description: 'Count of products' })
+  productsCount: number;
 }

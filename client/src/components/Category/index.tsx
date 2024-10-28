@@ -25,14 +25,14 @@ function Category({ category }: CategoryProps) {
         </span>
         <div className="flex items-center">
           <div
-            className={`flex justify-center items-center border-[1px] border-gray-200 rounded-2xl w-[32px] text-[12px] ${
+            className={`flex justify-center items-center border-[1px] border-gray-200 rounded-2xl w-[32px] text-[12px] transition-colors duration-200 ease-in-out ${
               isHovered ? "bg-[#89C647] border-[#89C647] text-[#ffffff]" : ""
             }`}
           >
-            {category.count}
+            {category.productsCount}
           </div>
           {category.subCategories.length > 0 && (
-            <div className="absolute right-0 ml-[5px] rounded-full transition-colors duration-300 ease-in-out hover:bg-gray-200 cursor-pointer">
+            <div className="flex justify-center items-center h-full aspect-square absolute right-0 ml-[5px] rounded-full transition-colors duration-200 ease-in-out hover:bg-gray-200 cursor-pointer">
               <IoIosArrowDown />
             </div>
           )}

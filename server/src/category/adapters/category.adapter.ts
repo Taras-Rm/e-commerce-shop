@@ -12,6 +12,7 @@ export class CategoryAdapter {
       subCategories: entity.subCategories
         ? entity.subCategories.map((subCategory) => this.toDto(subCategory))
         : [],
+      productsCount: entity.productsCount,
     };
   }
 }
