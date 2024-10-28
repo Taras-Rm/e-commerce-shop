@@ -5,9 +5,31 @@ import Characteristic from "./components/Characteristic";
 import { FaCheck } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
+import { useQuery } from "@tanstack/react-query";
+import { ProductI } from "@/types/types";
+import { useParams } from "next/navigation";
+import { getProductById } from "@/api/product";
+import Loader from "@/components/Loader";
 
 function ProductPage() {
-  // const params = useParams<{ productId: string }>();
+  const params = useParams<{ productId: string }>();
+
+  const { data: product, isLoading } = useQuery<ProductI>({
+    queryKey: ["product", params.productId],
+    queryFn: () => getProductById(Number(params.productId)),
+  });
+
+  if (isLoading) {
+    return (
+      <div className="h-full flex justify-center pt-[50px]">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (!product) {
+    return null;
+  }
 
   return (
     <div className="grid grid-cols-2 border-l border-gray-200 px-[15px]">
@@ -16,13 +38,13 @@ function ProductPage() {
       </div>
       <div className="pb-[30px]">
         <h1 className="text-[34px] text-[#2D2A2A] font-semibold leading-[1.2] mb-[20px]">
-          Product title 323
+          {product.name}
         </h1>
         <div className="text-[22px] text-[#89c647] font-semibold mb-[20px]">
-          111 grn
+          {product.price}
         </div>
         <p className="text-[#777777] text-[14px] mb-[20px]">
-          Short description
+          {product.shortDescription}
         </p>
         <div className="flex flex-col text-[14px] mb-[20px]">
           <Characteristic />
@@ -53,7 +75,7 @@ function ProductPage() {
         <div className="border-t border-gray-200 pt-[20px] text-[14px] space-y-[12px]">
           <div className="flex space-x-[5px]">
             <span className="font-semibold">Code:</span>
-            <span className="text-[#777777]">gdhs56gF</span>
+            <span className="text-[#777777]">{product.code}</span>
           </div>
           <div className="flex space-x-[5px]">
             <span className="font-semibold">Category:</span>
@@ -65,7 +87,7 @@ function ProductPage() {
         <h3 className="text-[16px] uppercase font-semibold mb-[40px]">
           Description
         </h3>
-        <p className="text-[14px] text-[#777777]">dsdcjdskj</p>
+        <p className="text-[14px] text-[#777777]">{product.description}</p>
       </div>
     </div>
   );
