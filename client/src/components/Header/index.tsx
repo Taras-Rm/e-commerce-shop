@@ -1,8 +1,6 @@
 "use client";
 
-import Image from "next/image";
 import React, { useState } from "react";
-import logoImage from "../../../public/logo4.svg";
 import MaxWidthWrapper from "../MaxWidthWrapper";
 import Link from "next/link";
 import { URLS } from "@/constants/pages";
@@ -90,7 +88,9 @@ function Header() {
       <div className="bg-[#000000] py-[21px] flex">
         <MaxWidthWrapper>
           <div className="flex justify-center">
-            <Image src={logoImage} width={256} alt={"logo"} />
+            <span className="text-[#89C647] uppercase font-bold text-[30px]">
+              Store
+            </span>
           </div>
         </MaxWidthWrapper>
       </div>
@@ -106,7 +106,7 @@ function Header() {
             </div>
             <div className="flex border-l-[1px] border-gray-300 pl-[20px] py-[3px] space-x-[30px]">
               <button className="bg-[#89C647] px-[20px] flex justify-center items-center whitespace-nowrap">
-                +38 (067) 98 98 898
+                +11 (111) 11 11 111
               </button>
               <div className="flex items-center h-full">
                 <Link href={"/"} className="p-[6px]">
