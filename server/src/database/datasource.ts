@@ -1,12 +1,10 @@
 import { DataSourceOptions } from 'typeorm';
 import { entities } from './entities';
+import { appConfig } from 'src/config/app';
 
 export const datasurce: DataSourceOptions = {
   type: 'postgres',
-  host: 'ep-shiny-haze-a5w18562.us-east-2.aws.neon.tech',
-  username: 'test_owner',
-  password: 'a0c5ojWDVywJ',
-  database: 'test',
+  url: appConfig.databaseUrl,
   synchronize: true,
   logging: false,
   entities,
@@ -15,5 +13,3 @@ export const datasurce: DataSourceOptions = {
   migrationsRun: false,
   ssl: { rejectUnauthorized: false },
 };
-
-// postgresql://test_owner:a0c5ojWDVywJ@ep-shiny-haze-a5w18562.us-east-2.aws.neon.tech/test?sslmode=require
