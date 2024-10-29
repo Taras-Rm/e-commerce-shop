@@ -3,12 +3,16 @@
 import { getAllCategories } from "@/api/category";
 import Category from "@/components/Category";
 import Loader from "@/components/Loader";
+import { URLS } from "@/constants/pages";
 import { useCategorySelection } from "@/context/CategorySelectionContext";
 import { CategoryI } from "@/types/types";
 import { useQuery } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 function Categories() {
+  const router = useRouter();
+
   const { setCategory } = useCategorySelection();
 
   const { data: categories, isLoading } = useQuery<CategoryI[]>({
@@ -18,6 +22,7 @@ function Categories() {
 
   const onCategoryClick = (category: CategoryI) => {
     setCategory(category);
+    router.push(URLS.shop);
   };
 
   return (

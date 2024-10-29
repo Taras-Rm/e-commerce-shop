@@ -27,6 +27,7 @@ function Products({ categoryId }: ProductsProps) {
     <div className="grid grid-cols-3 border-t border-l border-gray-200">
       {products?.map((product) => (
         <ProductCard
+          id={product.id}
           name={product.name}
           price={product.price}
           key={product.id}

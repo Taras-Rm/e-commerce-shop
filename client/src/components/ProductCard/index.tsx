@@ -8,9 +8,10 @@ import { IoIosSearch } from "react-icons/io";
 interface ProductCardProps {
   name: string;
   price: number;
+  id: number;
 }
 
-function ProductCard({ name, price }: ProductCardProps) {
+function ProductCard({ name, price, id }: ProductCardProps) {
   const [isHover, setIsHover] = useState(false);
   const isNew = true;
   const isSold = true;
@@ -24,7 +25,7 @@ function ProductCard({ name, price }: ProductCardProps) {
     >
       <div
         className="relative mb-[10px] overflow-hidden cursor-pointer"
-        onClick={() => router.push(URLS.shop + "/" + "id")}
+        onClick={() => router.push(URLS.shop + "/" + id)}
       >
         <img
           src="https://upstreambaits.com/wp-content/uploads/2020/04/darts_133-1.jpg"
