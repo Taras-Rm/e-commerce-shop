@@ -1,16 +1,20 @@
 "use client";
 
+import { useCategorySelection } from "@/context/CategorySelectionContext";
 import { CategoryI } from "@/types/types";
 import React, { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 
 interface CategoryProps {
   category: CategoryI;
+  onClick: (category: CategoryI) => void;
 }
 
-function Category({ category }: CategoryProps) {
+function Category({ category, onClick }: CategoryProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
+  const { category: activeCategory } = useCategorySelection();
 
   return (
     <>
@@ -18,7 +22,10 @@ function Category({ category }: CategoryProps) {
         className="text-[14px] text-[#727272] flex justify-between relative pr-[25px] cursor-pointer mt-[10px]"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        onClick={() => setIsOpen((value) => !value)}
+        onClick={() => {
+          onClick(category);
+          setIsOpen((value) => !value);
+        }}
       >
         <span className={`${isHovered ? "text-[#000000]" : ""}`}>
           {category.name}
@@ -26,7 +33,9 @@ function Category({ category }: CategoryProps) {
         <div className="flex items-center">
           <div
             className={`flex justify-center items-center border-[1px] border-gray-200 rounded-2xl w-[32px] text-[12px] transition-colors duration-200 ease-in-out ${
-              isHovered ? "bg-[#89C647] border-[#89C647] text-[#ffffff]" : ""
+              isHovered || activeCategory?.id === category.id
+                ? "bg-[#89C647] border-[#89C647] text-[#ffffff]"
+                : ""
             }`}
           >
             {category.productsCount}
@@ -45,7 +54,11 @@ function Category({ category }: CategoryProps) {
           }`}
         >
           {category.subCategories.map((subcategory) => (
-            <Category category={subcategory} key={subcategory.id} />
+            <Category
+              category={subcategory}
+              key={subcategory.id}
+              onClick={onClick}
+            />
           ))}
         </div>
       }

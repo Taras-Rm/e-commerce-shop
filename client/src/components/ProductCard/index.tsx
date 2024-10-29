@@ -5,7 +5,12 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 
-function ProductCard() {
+interface ProductCardProps {
+  name: string;
+  price: number;
+}
+
+function ProductCard({ name, price }: ProductCardProps) {
   const [isHover, setIsHover] = useState(false);
   const isNew = true;
   const isSold = true;
@@ -63,9 +68,9 @@ function ProductCard() {
       </div>
       <div className="flex flex-col items-center text-[14px]">
         <a className="mb-[5px] text-[#333333]" href="/">
-          Fish
+          {name}
         </a>
-        <span className="text-[#89C647] font-semibold">150 grn</span>
+        <span className="text-[#89C647] font-semibold">{price} grn</span>
       </div>
     </div>
   );

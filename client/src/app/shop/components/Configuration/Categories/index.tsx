@@ -3,15 +3,22 @@
 import { getAllCategories } from "@/api/category";
 import Category from "@/components/Category";
 import Loader from "@/components/Loader";
+import { useCategorySelection } from "@/context/CategorySelectionContext";
 import { CategoryI } from "@/types/types";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 
 function Categories() {
+  const { setCategory } = useCategorySelection();
+
   const { data: categories, isLoading } = useQuery<CategoryI[]>({
     queryKey: ["categories"],
     queryFn: getAllCategories,
   });
+
+  const onCategoryClick = (category: CategoryI) => {
+    setCategory(category);
+  };
 
   return (
     <div>
@@ -25,8 +32,8 @@ function Categories() {
         </div>
       ) : (
         <div className="flex flex-col">
-          {categories?.map((category) => (
-            <Category category={category} key={category.id} />
+          {categories?.map((c) => (
+            <Category category={c} key={c.id} onClick={onCategoryClick} />
           ))}
         </div>
       )}

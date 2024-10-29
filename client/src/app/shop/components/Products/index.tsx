@@ -1,66 +1,36 @@
+import { getProducts } from "@/api/product";
+import Loader from "@/components/Loader";
 import ProductCard from "@/components/ProductCard";
 import { ProductI } from "@/types/types";
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 
-const products: ProductI[] = [
-  {
-    id: 1,
-    name: "Fish",
-    price: 150,
-    shortDescription: "Des",
-    description: "Descrp",
-    categoryId: 1,
-    code: "AFS56GJ",
-    image:
-      "https://upstreambaits.com/wp-content/uploads/2020/04/darts_133-1.jpg",
-    characteristics: [
-      { key: "Size", value: "18mm" },
-      { key: "Color", value: "red" },
-    ],
-  },
-  {
-    id: 2,
-    name: "Fish",
-    price: 150,
-    shortDescription: "Des",
-    description: "Descrp",
-    categoryId: 1,
-    code: "AFS56GJ",
-    image:
-      "https://upstreambaits.com/wp-content/uploads/2020/04/darts_133-1.jpg",
-    characteristics: [],
-  },
-  {
-    id: 3,
-    name: "Fish",
-    price: 150,
-    shortDescription: "Des",
-    description: "Descrp",
-    categoryId: 1,
-    code: "AFS56GJ",
-    image:
-      "https://upstreambaits.com/wp-content/uploads/2020/04/darts_133-1.jpg",
-    characteristics: [],
-  },
-  {
-    id: 4,
-    name: "Fish",
-    price: 150,
-    shortDescription: "Des",
-    description: "Descrp",
-    categoryId: 1,
-    code: "AFS56GJ",
-    image:
-      "https://upstreambaits.com/wp-content/uploads/2020/04/darts_133-1.jpg",
-    characteristics: [],
-  },
-];
+interface ProductsProps {
+  categoryId?: number;
+}
 
-function Products() {
+function Products({ categoryId }: ProductsProps) {
+  const { data: products, isLoading } = useQuery<ProductI[]>({
+    queryKey: ["products", "category", categoryId],
+    queryFn: () => getProducts(categoryId),
+  });
+
+  if (isLoading) {
+    return (
+      <div className="h-full flex justify-center pt-[50px]">
+        <Loader />
+      </div>
+    );
+  }
+
   return (
     <div className="grid grid-cols-3 border-t border-l border-gray-200">
-      {products.map((product) => (
-        <ProductCard key={product.id} />
+      {products?.map((product) => (
+        <ProductCard
+          name={product.name}
+          price={product.price}
+          key={product.id}
+        />
       ))}
     </div>
   );

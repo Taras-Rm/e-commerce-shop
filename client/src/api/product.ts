@@ -6,3 +6,11 @@ export const getProductById = async (id: number): Promise<ProductI> => {
 
   return response.data;
 };
+
+export const getProducts = async (categoryId?: number): Promise<ProductI[]> => {
+  const response = await api.get<{ data: ProductI[] }>('/products', {
+    params: { categoryId },
+  });
+
+  return response.data.data;
+};
