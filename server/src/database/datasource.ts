@@ -1,8 +1,8 @@
-import { DataSourceOptions } from 'typeorm';
+import { DataSource, DataSourceOptions } from 'typeorm';
 import { entities } from './entities';
 import { appConfig } from 'src/config/app';
 
-export const datasurce: DataSourceOptions = {
+export const datasurceOptions: DataSourceOptions = {
   type: 'postgres',
   url: appConfig.databaseUrl,
   synchronize: true,
@@ -13,3 +13,5 @@ export const datasurce: DataSourceOptions = {
   migrationsRun: false,
   ssl: { rejectUnauthorized: false },
 };
+
+export const datasurce = new DataSource(datasurceOptions);
