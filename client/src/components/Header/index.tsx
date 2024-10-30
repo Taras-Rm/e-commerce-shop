@@ -24,64 +24,7 @@ const links: { url: string; name: string }[] = [
 function Header() {
   const [isShowCart, setIsShowCart] = useState(false);
 
-  const cartItems: CartItem[] = [
-    {
-      id: 1,
-      name: "Fish",
-      count: 2,
-      price: 150,
-      image:
-        "https://upstreambaits.com/wp-content/uploads/2020/04/sugar_133z.jpg",
-    },
-    {
-      id: 2,
-      name: "Cat",
-      count: 1,
-      price: 200,
-      image:
-        "https://upstreambaits.com/wp-content/uploads/2020/04/sugar_133z.jpg",
-    },
-    {
-      id: 3,
-      name: "Cat",
-      count: 1,
-      price: 200,
-      image:
-        "https://upstreambaits.com/wp-content/uploads/2020/04/sugar_133z.jpg",
-    },
-    {
-      id: 4,
-      name: "Cat",
-      count: 1,
-      price: 200,
-      image:
-        "https://upstreambaits.com/wp-content/uploads/2020/04/sugar_133z.jpg",
-    },
-    {
-      id: 5,
-      name: "Cat",
-      count: 1,
-      price: 200,
-      image:
-        "https://upstreambaits.com/wp-content/uploads/2020/04/sugar_133z.jpg",
-    },
-    {
-      id: 6,
-      name: "Cat",
-      count: 1,
-      price: 200,
-      image:
-        "https://upstreambaits.com/wp-content/uploads/2020/04/sugar_133z.jpg",
-    },
-    {
-      id: 7,
-      name: "Cat",
-      count: 1,
-      price: 200,
-      image:
-        "https://upstreambaits.com/wp-content/uploads/2020/04/sugar_133z.jpg",
-    },
-  ];
+  const cartItems: CartItem[] = [];
 
   return (
     <header className="sticky top-0 z-50">

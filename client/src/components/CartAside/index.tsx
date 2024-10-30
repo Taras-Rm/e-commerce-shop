@@ -34,7 +34,7 @@ function CartAside({ isShowed, close, items }: CartAsideProps) {
               Close
             </span>
           </div>
-          {items.length < 0 ? (
+          {items.length <= 0 ? (
             <div className="flex flex-col items-center text-[12px]">
               <BsCartX
                 size={100}
