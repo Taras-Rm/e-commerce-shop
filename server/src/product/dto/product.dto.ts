@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { CategoryDto } from 'src/category/dto/category.dto';
+import { ProductCharacteristicDto } from './product-characteristic.dto';
 
 export class ProductDto {
   @ApiProperty()
@@ -40,4 +41,7 @@ export class ProductDto {
 
   @ApiProperty()
   category: CategoryDto;
+
+  @ApiProperty()
+  characteristics: ProductCharacteristicDto[];
 }

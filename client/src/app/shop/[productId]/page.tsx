@@ -50,10 +50,14 @@ function ProductPage() {
         <p className="text-[#777777] text-[14px] mb-[20px]">
           {product.shortDescription}
         </p>
-        <div className="flex flex-col text-[14px] mb-[20px]">
-          <Characteristic />
-          <Characteristic />
-        </div>
+        {product.characteristics.length > 0 && (
+          <div className="flex flex-col text-[14px] mb-[20px]">
+            {product.characteristics.map((ch) => (
+              <Characteristic key={ch.id} keyValue={ch.key} value={ch.value} />
+            ))}
+          </div>
+        )}
+
         {isSold ? (
           <div className="flex items-center space-x-[5px] mb-[20px]">
             <IoMdClose color="red" />

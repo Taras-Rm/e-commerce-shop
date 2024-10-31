@@ -27,13 +27,14 @@ export type ProductI = {
   categoryId: number;
   code: string;
   image?: string;
-  characteristics: CharacteristicI[];
+  characteristics: ProductCharacteristicI[];
   currency: string;
   quantity: number;
   isNew: boolean;
 };
 
-export type CharacteristicI = {
+export type ProductCharacteristicI = {
+  id: number;
   key: string;
   value: string;
 };

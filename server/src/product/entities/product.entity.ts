@@ -53,7 +53,7 @@ export class ProductEntity extends BaseEntity {
 
   @OneToMany(
     () => ProductCharacteristicEntity,
-    (characteristic) => characteristic,
+    (characteristic) => characteristic.product,
   )
   characteristics: Relation<ProductCharacteristicEntity[]>;
 }
