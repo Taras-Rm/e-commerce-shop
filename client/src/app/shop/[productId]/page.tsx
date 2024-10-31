@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Characteristic from "./components/Characteristic";
 import { FaCheck } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa";
@@ -14,6 +14,8 @@ import { IoMdClose } from "react-icons/io";
 
 function ProductPage() {
   const params = useParams<{ productId: string }>();
+
+  const [count, setCount] = useState<number>(1);
 
   const { data: product, isLoading } = useQuery<ProductI>({
     queryKey: ["product", params.productId],
@@ -75,13 +77,21 @@ function ProductPage() {
             </div>
             <div className="h-[40px] flex space-x-[15px] mb-[20px]">
               <div className="flex h-full">
-                <button className="border border-gray-200 px-[7px] transition-colors duration-300 ease-in-out hover:bg-[#89c647] hover:text-[#ffffff] hover:border-[#89c647]">
+                <button
+                  onClick={() => count > 1 && setCount((val) => val - 1)}
+                  className="border border-gray-200 px-[7px] transition-colors duration-300 ease-in-out hover:bg-[#89c647] hover:text-[#ffffff] hover:border-[#89c647]"
+                >
                   <FaMinus size={7} />
                 </button>
-                <div className="border-y border-gray-200 px-[10px] flex items-center justify-center text-[14px]">
-                  3
+                <div className="border-y border-gray-200 w-[35px] px-[10px] flex items-center justify-center text-[14px]">
+                  {count}
                 </div>
-                <button className="border border-gray-200 px-[7px] transition-colors duration-300 ease-in-out hover:bg-[#89c647] hover:text-[#ffffff] hover:border-[#89c647]">
+                <button
+                  onClick={() =>
+                    count < product.quantity && setCount((val) => val + 1)
+                  }
+                  className="border border-gray-200 px-[7px] transition-colors duration-300 ease-in-out hover:bg-[#89c647] hover:text-[#ffffff] hover:border-[#89c647]"
+                >
                   <FaPlus size={7} />
                 </button>
               </div>
