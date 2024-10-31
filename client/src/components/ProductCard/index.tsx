@@ -9,13 +9,16 @@ interface ProductCardProps {
   name: string;
   price: number;
   id: number;
+  quantity: number;
 }
 
-function ProductCard({ name, price, id }: ProductCardProps) {
-  const [isHover, setIsHover] = useState(false);
-  const isNew = true;
-  const isSold = true;
+function ProductCard({ name, price, id, quantity }: ProductCardProps) {
   const router = useRouter();
+
+  const [isHover, setIsHover] = useState(false);
+
+  const isNew = true;
+  const isSold = quantity === 0;
 
   return (
     <div
@@ -59,13 +62,15 @@ function ProductCard({ name, price, id }: ProductCardProps) {
           </div>
         </div>
         {/* button */}
-        <button
-          className={`absolute bottom-0 uppercase text-[14px] text-[#ffffff] bg-[#89C647] w-full p-[10px] font-semibold transition-all duration-300 ${
-            isHover ? "translate-y-0" : "translate-y-full"
-          }`}
-        >
-          Add to cart
-        </button>
+        {!isSold && (
+          <button
+            className={`absolute bottom-0 uppercase text-[14px] text-[#ffffff] bg-[#89C647] w-full p-[10px] font-semibold transition-all duration-300 ${
+              isHover ? "translate-y-0" : "translate-y-full"
+            }`}
+          >
+            Add to cart
+          </button>
+        )}
       </div>
       <div className="flex flex-col items-center text-[14px]">
         <a className="mb-[5px] text-[#333333]" href="/">

@@ -36,6 +36,9 @@ export class ProductEntity extends BaseEntity {
   @Column({ type: 'varchar', name: 'image_url', nullable: true })
   imageUrl: string;
 
+  @Column({ type: 'int', nullable: false, default: 0 })
+  quantity: number;
+
   // TODO: enum
   @Column({ type: 'varchar', name: 'price_per', nullable: true })
   pricePer: string;

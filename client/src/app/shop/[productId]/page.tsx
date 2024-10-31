@@ -10,6 +10,7 @@ import { ProductI } from "@/types/types";
 import { useParams } from "next/navigation";
 import { getProductById } from "@/api/product";
 import Loader from "@/components/Loader";
+import { IoMdClose } from "react-icons/io";
 
 function ProductPage() {
   const params = useParams<{ productId: string }>();
@@ -18,6 +19,8 @@ function ProductPage() {
     queryKey: ["product", params.productId],
     queryFn: () => getProductById(Number(params.productId)),
   });
+
+  const isSold = product?.quantity === 0;
 
   if (isLoading) {
     return (
@@ -40,8 +43,9 @@ function ProductPage() {
         <h1 className="text-[34px] text-[#2D2A2A] font-semibold leading-[1.2] mb-[20px]">
           {product.name}
         </h1>
-        <div className="text-[22px] text-[#89c647] font-semibold mb-[20px]">
-          {product.price}
+        <div className="text-[22px] text-[#89c647] font-semibold mb-[20px] space-x-[8px]">
+          <span>{product.price}</span>
+          <span>{product.currency}</span>
         </div>
         <p className="text-[#777777] text-[14px] mb-[20px]">
           {product.shortDescription}
@@ -50,28 +54,39 @@ function ProductPage() {
           <Characteristic />
           <Characteristic />
         </div>
-        <div className="flex items-center space-x-[5px] mb-[20px]">
-          <FaCheck color="#89c647" />
-          <span className="text-[14px] text-[#333333] font-semibold">
-            Present
-          </span>
-        </div>
-        <div className="h-[40px] flex space-x-[15px] mb-[20px]">
-          <div className="flex h-full">
-            <button className="border border-gray-200 px-[7px] transition-colors duration-300 ease-in-out hover:bg-[#89c647] hover:text-[#ffffff] hover:border-[#89c647]">
-              <FaMinus size={7} />
-            </button>
-            <div className="border-y border-gray-200 px-[10px] flex items-center justify-center text-[14px]">
-              3
-            </div>
-            <button className="border border-gray-200 px-[7px] transition-colors duration-300 ease-in-out hover:bg-[#89c647] hover:text-[#ffffff] hover:border-[#89c647]">
-              <FaPlus size={7} />
-            </button>
+        {isSold ? (
+          <div className="flex items-center space-x-[5px] mb-[20px]">
+            <IoMdClose color="red" />
+            <span className="text-[14px] text-[#333333] font-semibold">
+              Not available
+            </span>
           </div>
-          <button className="bg-[#89c647] px-[20px] uppercase text-[13px] font-semibold">
-            Add to cart
-          </button>
-        </div>
+        ) : (
+          <>
+            <div className="flex items-center space-x-[5px] mb-[20px]">
+              <FaCheck color="#89c647" />
+              <span className="text-[14px] text-[#333333] font-semibold">
+                Present
+              </span>
+            </div>
+            <div className="h-[40px] flex space-x-[15px] mb-[20px]">
+              <div className="flex h-full">
+                <button className="border border-gray-200 px-[7px] transition-colors duration-300 ease-in-out hover:bg-[#89c647] hover:text-[#ffffff] hover:border-[#89c647]">
+                  <FaMinus size={7} />
+                </button>
+                <div className="border-y border-gray-200 px-[10px] flex items-center justify-center text-[14px]">
+                  3
+                </div>
+                <button className="border border-gray-200 px-[7px] transition-colors duration-300 ease-in-out hover:bg-[#89c647] hover:text-[#ffffff] hover:border-[#89c647]">
+                  <FaPlus size={7} />
+                </button>
+              </div>
+              <button className="bg-[#89c647] px-[20px] uppercase text-[13px] font-semibold">
+                Add to cart
+              </button>
+            </div>
+          </>
+        )}
         <div className="border-t border-gray-200 pt-[20px] text-[14px] space-y-[12px]">
           <div className="flex space-x-[5px]">
             <span className="font-semibold">Code:</span>

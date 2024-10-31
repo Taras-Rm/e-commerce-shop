@@ -28,6 +28,8 @@ export type ProductI = {
   code: string;
   image?: string;
   characteristics: CharacteristicI[];
+  currency: string;
+  quantity: number;
 };
 
 export type CharacteristicI = {

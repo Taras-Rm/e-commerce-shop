@@ -33,5 +33,8 @@ export class ProductDto {
   pricePer: string;
 
   @ApiProperty()
+  quantity: number;
+
+  @ApiProperty()
   category: CategoryDto;
 }

@@ -31,6 +31,7 @@ function Products({ categoryId }: ProductsProps) {
           name={product.name}
           price={product.price}
           key={product.id}
+          quantity={product.quantity}
         />
       ))}
     </div>
