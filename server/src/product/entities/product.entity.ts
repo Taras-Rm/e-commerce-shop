@@ -39,6 +39,9 @@ export class ProductEntity extends BaseEntity {
   @Column({ type: 'int', nullable: false, default: 0 })
   quantity: number;
 
+  @Column({ type: 'boolean', name: 'is_new', nullable: false, default: false })
+  isNew: boolean;
+
   // TODO: enum
   @Column({ type: 'varchar', name: 'price_per', nullable: true })
   pricePer: string;

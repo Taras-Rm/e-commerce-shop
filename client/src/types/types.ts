@@ -30,6 +30,7 @@ export type ProductI = {
   characteristics: CharacteristicI[];
   currency: string;
   quantity: number;
+  isNew: boolean;
 };
 
 export type CharacteristicI = {

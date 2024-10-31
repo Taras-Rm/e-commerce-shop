@@ -16,6 +16,7 @@ export class ProductAdapter {
       imageUrl: entity.imageUrl,
       pricePer: entity.pricePer,
       quantity: entity.quantity,
+      isNew: entity.isNew,
       category: entity.category && CategoryAdapter.toDto(entity.category),
     };
   }

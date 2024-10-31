@@ -10,14 +10,14 @@ interface ProductCardProps {
   price: number;
   id: number;
   quantity: number;
+  isNew: boolean;
 }
 
-function ProductCard({ name, price, id, quantity }: ProductCardProps) {
+function ProductCard({ name, price, id, quantity, isNew }: ProductCardProps) {
   const router = useRouter();
 
   const [isHover, setIsHover] = useState(false);
 
-  const isNew = true;
   const isSold = quantity === 0;
 
   return (

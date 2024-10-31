@@ -41,7 +41,13 @@ function Category({ category, onClick }: CategoryProps) {
             {category.productsCount}
           </div>
           {category.subCategories.length > 0 && (
-            <div className="flex justify-center items-center h-full aspect-square absolute right-0 ml-[5px] rounded-full transition-colors duration-200 ease-in-out hover:bg-gray-200 cursor-pointer">
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsOpen((value) => !value);
+              }}
+              className="flex justify-center items-center h-full aspect-square absolute right-0 ml-[5px] rounded-full transition-colors duration-200 ease-in-out hover:bg-gray-200 cursor-pointer"
+            >
               <IoIosArrowDown />
             </div>
           )}

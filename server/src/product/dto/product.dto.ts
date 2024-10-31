@@ -36,5 +36,8 @@ export class ProductDto {
   quantity: number;
 
   @ApiProperty()
+  isNew: boolean;
+
+  @ApiProperty()
   category: CategoryDto;
 }

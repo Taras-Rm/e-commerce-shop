@@ -32,6 +32,7 @@ function Products({ categoryId }: ProductsProps) {
           price={product.price}
           key={product.id}
           quantity={product.quantity}
+          isNew={product.isNew}
         />
       ))}
     </div>
