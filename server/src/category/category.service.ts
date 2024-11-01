@@ -10,6 +10,14 @@ export class CategoryService {
     private readonly categoryRepository: Repository<CategoryEntity>,
   ) {}
 
+  async getCategorySubCategories(id: number): Promise<CategoryEntity[]> {
+    const subCategories = await this.categoryRepository.find({
+      where: { parentId: id },
+    });
+
+    return subCategories;
+  }
+
   async getAll(): Promise<CategoryEntity[]> {
     const categories = await this.categoryRepository
       .createQueryBuilder('category')

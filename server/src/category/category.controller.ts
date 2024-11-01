@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { CategoryDto } from './dto/category.dto';
 import { CategoryService } from './category.service';
 import { CategoryAdapter } from './adapters/category.adapter';
@@ -17,6 +17,20 @@ export class CategoryController {
   })
   async getAllCategories(): Promise<CategoryDto[]> {
     const categories = await this.categoryService.getAll();
+
+    return categories.map((category) => CategoryAdapter.toDto(category));
+  }
+
+  @Get('/:id/subCategories')
+  @ApiOkResponse({
+    type: CategoryDto,
+    isArray: true,
+    description: 'Get all category subCategories',
+  })
+  async getAllCategorySubCategories(
+    @Param('id') id: number,
+  ): Promise<CategoryDto[]> {
+    const categories = await this.categoryService.getCategorySubCategories(id);
 
     return categories.map((category) => CategoryAdapter.toDto(category));
   }
