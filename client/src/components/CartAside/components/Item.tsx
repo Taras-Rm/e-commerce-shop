@@ -5,9 +5,10 @@ import { IoIosClose } from "react-icons/io";
 
 interface ItemProps {
   item: CartItemType;
+  removeProduct: (id: number) => void;
 }
 
-function Item({ item }: ItemProps) {
+function Item({ item, removeProduct }: ItemProps) {
   return (
     <div className="p-[15px] flex justify-between cursor-pointer border-[1px] border-gray-200 first:border-none transition-colors duration-300 ease-in-out hover:bg-gray-100">
       <div className="flex">
@@ -24,7 +25,10 @@ function Item({ item }: ItemProps) {
         </div>
       </div>
       <div>
-        <div className="rounded-full transition-colors duration-300 ease-in-out hover:bg-[#ffffff]">
+        <div
+          onClick={() => removeProduct(item.id)}
+          className="rounded-full transition-colors duration-300 ease-in-out hover:bg-[#ffffff]"
+        >
           <IoIosClose size={20} />
         </div>
       </div>

@@ -8,7 +8,7 @@ import { FaFacebookF, FaInstagram, FaHryvnia } from "react-icons/fa";
 import { IoPlayOutline } from "react-icons/io5";
 import { BsBasket3 } from "react-icons/bs";
 import CartAside from "../CartAside";
-import { CartItem } from "@/types/types";
+import { useCart } from "@/context/CartContext";
 
 const links: { url: string; name: string }[] = [
   {
@@ -24,7 +24,7 @@ const links: { url: string; name: string }[] = [
 function Header() {
   const [isShowCart, setIsShowCart] = useState(false);
 
-  const cartItems: CartItem[] = [];
+  const { cartProducts } = useCart();
 
   return (
     <header className="sticky top-0 z-50">
@@ -70,7 +70,7 @@ function Header() {
               >
                 <BsBasket3 size={20} className="cursor-pointer" />
                 <div className="absolute top-[calc(15%)] right-[calc(-35%)] w-[15px] h-[15px] flex items-center justify-center text-[10px] rounded-full bg-[#89C647] text-[#ffffff]">
-                  0
+                  {cartProducts.length}
                 </div>
               </div>
               <div className="flex items-center font-bold">
@@ -84,7 +84,6 @@ function Header() {
       <CartAside
         isShowed={isShowCart}
         close={() => setIsShowCart(false)}
-        items={cartItems}
       />
     </header>
   );

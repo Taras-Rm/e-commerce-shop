@@ -11,9 +11,12 @@ import { useParams } from "next/navigation";
 import { getProductById } from "@/api/product";
 import Loader from "@/components/Loader";
 import { IoMdClose } from "react-icons/io";
+import { useCart } from "@/context/CartContext";
 
 function ProductPage() {
   const params = useParams<{ productId: string }>();
+
+  const { changeProductCount } = useCart();
 
   const [count, setCount] = useState<number>(1);
 
@@ -21,6 +24,23 @@ function ProductPage() {
     queryKey: ["product", params.productId],
     queryFn: () => getProductById(Number(params.productId)),
   });
+
+  const handleAddToCart = () => {
+    if (!product) {
+      return;
+    }
+
+    changeProductCount(
+      {
+        id: product?.id,
+        name: product?.name,
+        image: product?.image,
+        price: product?.price,
+      },
+      count,
+      "add"
+    );
+  };
 
   const isSold = product?.quantity === 0;
 
@@ -95,7 +115,10 @@ function ProductPage() {
                   <FaPlus size={7} />
                 </button>
               </div>
-              <button className="bg-[#89c647] px-[20px] uppercase text-[13px] font-semibold">
+              <button
+                onClick={handleAddToCart}
+                className="bg-[#89c647] px-[20px] uppercase text-[13px] font-semibold"
+              >
                 Add to cart
               </button>
             </div>

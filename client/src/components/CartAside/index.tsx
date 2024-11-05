@@ -3,16 +3,19 @@ import Link from "next/link";
 import React from "react";
 import { BsCartX } from "react-icons/bs";
 import Item from "./components/Item";
-import { CartItem } from "@/types/types";
 import { FaHryvnia } from "react-icons/fa";
+import { useCart } from "@/context/CartContext";
 
 interface CartAsideProps {
   isShowed: boolean;
   close: () => void;
-  items: CartItem[];
 }
 
-function CartAside({ isShowed, close, items }: CartAsideProps) {
+function CartAside({ isShowed, close }: CartAsideProps) {
+  const { cartProducts, removeProduct, getTotalCost } = useCart();
+
+  const totalCost = getTotalCost();
+
   return (
     <div
       className={`fixed inset-0 z-40 transition-all duration-300 ease-in-out ${
@@ -34,7 +37,7 @@ function CartAside({ isShowed, close, items }: CartAsideProps) {
               Close
             </span>
           </div>
-          {items.length <= 0 ? (
+          {cartProducts.length <= 0 ? (
             <div className="flex flex-col items-center text-[12px]">
               <BsCartX
                 size={100}
@@ -53,8 +56,12 @@ function CartAside({ isShowed, close, items }: CartAsideProps) {
           ) : (
             <>
               <div className="overflow-y-auto">
-                {items.map((item) => (
-                  <Item item={item} key={item.name} />
+                {cartProducts.map((item) => (
+                  <Item
+                    item={item}
+                    key={item.name}
+                    removeProduct={removeProduct}
+                  />
                 ))}
               </div>
               <div className="p-[15px] border-[2px] border-gray-200">
@@ -63,7 +70,7 @@ function CartAside({ isShowed, close, items }: CartAsideProps) {
                     Total:
                   </span>
                   <div className="text-[20px] text-[#89C647] flex items-center">
-                    <span>356</span>
+                    <span>{totalCost}</span>
                     <FaHryvnia />
                   </div>
                 </div>
