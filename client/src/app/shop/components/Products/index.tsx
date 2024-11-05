@@ -1,6 +1,7 @@
 import { getProducts } from "@/api/product";
 import Loader from "@/components/Loader";
 import ProductCard from "@/components/ProductCard";
+import { useCart } from "@/context/CartContext";
 import { ProductI } from "@/types/types";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
@@ -14,6 +15,8 @@ function Products({ categoryId }: ProductsProps) {
     queryKey: ["products", "category", categoryId],
     queryFn: () => getProducts(categoryId),
   });
+
+  const { changeProductCount } = useCart();
 
   if (isLoading) {
     return (
@@ -33,6 +36,7 @@ function Products({ categoryId }: ProductsProps) {
           key={product.id}
           quantity={product.quantity}
           isNew={product.isNew}
+          addToCart={() => changeProductCount({ ...product }, 1, "add")}
         />
       ))}
     </div>

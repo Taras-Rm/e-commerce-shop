@@ -24,7 +24,7 @@ const links: { url: string; name: string }[] = [
 function Header() {
   const [isShowCart, setIsShowCart] = useState(false);
 
-  const { cartProducts } = useCart();
+  const { cartProducts, getTotalCost } = useCart();
 
   return (
     <header className="sticky top-0 z-50">
@@ -73,18 +73,15 @@ function Header() {
                   {cartProducts.length}
                 </div>
               </div>
-              <div className="flex items-center font-bold">
-                <span className="pr-[3px]">0</span>
+              <div className="flex justify-end items-center font-bold">
+                <span className="pr-[3px]">{getTotalCost()}</span>
                 <FaHryvnia size={14} />
               </div>
             </div>
           </div>
         </MaxWidthWrapper>
       </div>
-      <CartAside
-        isShowed={isShowCart}
-        close={() => setIsShowCart(false)}
-      />
+      <CartAside isShowed={isShowCart} close={() => setIsShowCart(false)} />
     </header>
   );
 }

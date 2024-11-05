@@ -11,12 +11,27 @@ interface ProductCardProps {
   id: number;
   quantity: number;
   isNew: boolean;
+  addToCart: () => void;
 }
 
-function ProductCard({ name, price, id, quantity, isNew }: ProductCardProps) {
+function ProductCard({
+  name,
+  price,
+  id,
+  quantity,
+  isNew,
+  addToCart,
+}: ProductCardProps) {
   const router = useRouter();
 
   const [isHover, setIsHover] = useState(false);
+
+  const handleAddToCartClick = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
+    addToCart();
+  };
 
   const isSold = quantity === 0;
 
@@ -64,6 +79,7 @@ function ProductCard({ name, price, id, quantity, isNew }: ProductCardProps) {
         {/* button */}
         {!isSold && (
           <button
+            onClick={handleAddToCartClick}
             className={`absolute bottom-0 uppercase text-[14px] text-[#ffffff] bg-[#89C647] w-full p-[10px] font-semibold transition-all duration-300 ${
               isHover ? "translate-y-0" : "translate-y-full"
             }`}
