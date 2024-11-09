@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import MaxWidthWrapper from "../MaxWidthWrapper";
 import Link from "next/link";
 import { URLS } from "@/constants/pages";
@@ -9,8 +9,10 @@ import { IoPlayOutline } from "react-icons/io5";
 import { BsBasket3 } from "react-icons/bs";
 import CartAside from "../CartAside";
 import { useCart } from "@/context/CartContext";
+import { usePathname } from "next/navigation";
+import { ActiveLinkI, LinkI } from "@/types/types";
 
-const links: { url: string; name: string }[] = [
+const links: LinkI[] = [
   {
     url: URLS.home,
     name: "Main",
@@ -23,6 +25,20 @@ const links: { url: string; name: string }[] = [
 
 function Header() {
   const [isShowCart, setIsShowCart] = useState(false);
+
+  const pathName = usePathname();
+
+  const preparedLinks: ActiveLinkI[] = useMemo(() => {
+    return links.map((link) => {
+      return {
+        ...link,
+        isActive:
+          link.url === "/"
+            ? pathName === link.url
+            : pathName.startsWith(link.url),
+      };
+    });
+  }, [pathName]);
 
   const { cartProducts, getTotalCost } = useCart();
 
@@ -41,9 +57,19 @@ function Header() {
         <MaxWidthWrapper>
           <div className="flex h-full text-[13px]">
             <div className="uppercase font-bold space-x-[20px] h-full w-full flex items-center">
-              {links.map((link) => (
-                <Link href={link.url} className="h-full" key={link.url}>
-                  <div className="h-full flex items-center">{link.name}</div>
+              {preparedLinks.map((link) => (
+                <Link
+                  href={link.url}
+                  className="h-full flex items-center justify-center"
+                  key={link.url}
+                >
+                  <div
+                    className={`flex items-center pb-[1px] border-b-[2px] border-transparent ${
+                      link.isActive ? "border-b-[#89C647]" : ""
+                    }`}
+                  >
+                    {link.name}
+                  </div>
                 </Link>
               ))}
             </div>

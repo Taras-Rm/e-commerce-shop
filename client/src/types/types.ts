@@ -38,3 +38,12 @@ export type ProductCharacteristicI = {
   key: string;
   value: string;
 };
+
+export type LinkI = {
+  name: string;
+  url: string;
+};
+
+export type ActiveLinkI = LinkI & {
+  isActive: boolean;
+};
