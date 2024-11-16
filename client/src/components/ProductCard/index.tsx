@@ -4,6 +4,8 @@ import { URLS } from "@/constants/pages";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { IoIosSearch } from "react-icons/io";
+import NoImage from "@/assets/no-image.png";
+import Image from "next/image";
 
 interface ProductCardProps {
   name: string;
@@ -12,6 +14,7 @@ interface ProductCardProps {
   quantity: number;
   isNew: boolean;
   addToCart: () => void;
+  imageUrl?: string;
 }
 
 function ProductCard({
@@ -21,6 +24,7 @@ function ProductCard({
   quantity,
   isNew,
   addToCart,
+  imageUrl,
 }: ProductCardProps) {
   const router = useRouter();
 
@@ -45,12 +49,23 @@ function ProductCard({
         className="relative mb-[10px] overflow-hidden cursor-pointer"
         onClick={() => router.push(URLS.shop + "/" + id)}
       >
-        <img
-          src="https://upstreambaits.com/wp-content/uploads/2020/04/darts_133-1.jpg"
-          height={240}
-          width={240}
-          className="mb-[10px]"
-        />
+        {imageUrl ? (
+          <img
+            src={imageUrl}
+            height={240}
+            width={240}
+            className="mb-[10px]"
+            alt="product mage"
+          />
+        ) : (
+          <Image
+            src={NoImage}
+            height={240}
+            width={240}
+            className="mb-[10px]"
+            alt="product mage"
+          />
+        )}
         {/* labels */}
         <div className="absolute top-0 left-0 font-semibold space-y-[10px]">
           {isSold && (

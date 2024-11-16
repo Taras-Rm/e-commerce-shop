@@ -26,7 +26,7 @@ export type ProductI = {
   description: string;
   categoryId: number;
   code: string;
-  image?: string;
+  imageUrl?: string;
   characteristics: ProductCharacteristicI[];
   currency: string;
   quantity: number;

@@ -37,6 +37,7 @@ function Products({ categoryId }: ProductsProps) {
           quantity={product.quantity}
           isNew={product.isNew}
           addToCart={() => changeProductCount({ ...product }, 1, "add")}
+          imageUrl={product.imageUrl}
         />
       ))}
     </div>
