@@ -6,13 +6,13 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="">
+    <div>
       <div className="relative">
         <video autoPlay muted loop>
           <source src={Preview} />
         </video>
         <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-          <h1 className="text-[36px] text-white font-semibold">
+          <h1 className="text-[36px] text-white font-semibold text-center">
             The best online STORE
           </h1>
           <Link

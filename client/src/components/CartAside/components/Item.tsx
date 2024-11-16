@@ -11,11 +11,13 @@ interface ItemProps {
 }
 
 function Item({ item, removeProduct }: ItemProps) {
+  console.log({ item });
+
   return (
     <div className="p-[15px] flex justify-between cursor-pointer border-[1px] border-gray-200 first:border-none transition-colors duration-300 ease-in-out hover:bg-gray-100">
       <div className="flex">
         <Image
-          src={item.image ? item.image : NoImage}
+          src={item.imageUrl ? item.imageUrl : NoImage}
           height={65}
           width={65}
           className="mb-[10px]"
