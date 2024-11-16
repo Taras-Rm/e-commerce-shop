@@ -49,23 +49,13 @@ function ProductCard({
         className="relative mb-[10px] overflow-hidden cursor-pointer"
         onClick={() => router.push(URLS.shop + "/" + id)}
       >
-        {imageUrl ? (
-          <img
-            src={imageUrl}
-            height={240}
-            width={240}
-            className="mb-[10px]"
-            alt="product mage"
-          />
-        ) : (
-          <Image
-            src={NoImage}
-            height={240}
-            width={240}
-            className="mb-[10px]"
-            alt="product mage"
-          />
-        )}
+        <Image
+          src={imageUrl ? imageUrl : NoImage}
+          height={240}
+          width={240}
+          className="mb-[10px]"
+          alt="product image"
+        />
         {/* labels */}
         <div className="absolute top-0 left-0 font-semibold space-y-[10px]">
           {isSold && (

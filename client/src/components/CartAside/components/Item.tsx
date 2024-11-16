@@ -2,6 +2,8 @@ import { CartItem as CartItemType } from "@/types/types";
 import React from "react";
 import { FaHryvnia } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
+import NoImage from "@/assets/no-image.png";
+import Image from "next/image";
 
 interface ItemProps {
   item: CartItemType;
@@ -12,7 +14,13 @@ function Item({ item, removeProduct }: ItemProps) {
   return (
     <div className="p-[15px] flex justify-between cursor-pointer border-[1px] border-gray-200 first:border-none transition-colors duration-300 ease-in-out hover:bg-gray-100">
       <div className="flex">
-        <img src={item.image} width={65} height={65} alt="cart item" />
+        <Image
+          src={item.image ? item.image : NoImage}
+          height={65}
+          width={65}
+          className="mb-[10px]"
+          alt="cart item"
+        />
         <div className="ml-[15px] text-[13px] flex flex-col">
           <span className="mb-[6px] text-[14px]">{item.name}</span>
           <div className="text-gray-400 flex items-center space-x-1">

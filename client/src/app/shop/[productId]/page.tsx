@@ -12,6 +12,8 @@ import { getProductById } from "@/api/product";
 import Loader from "@/components/Loader";
 import { IoMdClose } from "react-icons/io";
 import { useCart } from "@/context/CartContext";
+import Image from "next/image";
+import NoImage from "@/assets/no-image.png";
 
 function ProductPage() {
   const params = useParams<{ productId: string }>();
@@ -34,7 +36,7 @@ function ProductPage() {
       {
         id: product?.id,
         name: product?.name,
-        image: product?.image,
+        image: product?.imageUrl,
         price: product?.price,
       },
       count,
@@ -59,7 +61,14 @@ function ProductPage() {
   return (
     <div className="grid grid-cols-2 border-l border-gray-200 px-[15px]">
       <div className="max-h-[413px] max-w-[383px] px-[15px]">
-        <img src="https://upstreambaits.com/wp-content/uploads/2020/04/darts_133-1.jpg" />
+        <Image
+          src={product.imageUrl ? product.imageUrl : NoImage}
+          height={240}
+          width={240}
+          className="mb-[10px]"
+          alt="product image"
+        />
+        {/* <img src="https://upstreambaits.com/wp-content/uploads/2020/04/darts_133-1.jpg" /> */}
       </div>
       <div className="pb-[30px]">
         <h1 className="text-[34px] text-[#2D2A2A] font-semibold leading-[1.2] mb-[20px]">
