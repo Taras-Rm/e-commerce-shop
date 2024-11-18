@@ -41,7 +41,7 @@ function ProductCard({
 
   return (
     <div
-      className="border-b border-r border-gray-200 p-[15px]"
+      className="border-b border-r border-gray-200 p-[15px] flex flex-col justify-between"
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
@@ -49,15 +49,16 @@ function ProductCard({
         className="relative mb-[10px] overflow-hidden cursor-pointer"
         onClick={() => router.push(URLS.shop + "/" + id)}
       >
-        <Image
-          src={imageUrl ? imageUrl : NoImage}
-          height={240}
-          width={240}
-          className="mb-[10px]"
-          alt="product image"
-        />
+        <div className="relativ h-[200px]">
+          <Image
+            src={imageUrl ? imageUrl : NoImage}
+            className="object-cover"
+            fill
+            alt="product image"
+          />
+        </div>
         {/* labels */}
-        <div className="absolute top-0 left-0 font-semibold space-y-[10px]">
+        <div className="absolute top-3 left-3 font-semibold space-y-[10px]">
           {isSold && (
             <div className="bg-[#ffffff] text-[#2D2A2A] py-[5px] px-[10px] uppercase text-[12px] opacity-85">
               Sold
