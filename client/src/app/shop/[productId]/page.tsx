@@ -36,7 +36,7 @@ function ProductPage() {
       {
         id: product?.id,
         name: product?.name,
-        image: product?.imageUrl,
+        imageUrl: product?.imageUrl,
         price: product?.price,
       },
       count,

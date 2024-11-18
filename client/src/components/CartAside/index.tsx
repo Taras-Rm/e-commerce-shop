@@ -55,7 +55,7 @@ function CartAside({ isShowed, close }: CartAsideProps) {
             </div>
           ) : (
             <>
-              <div className="overflow-y-auto">
+              <div className="overflow-y-auto h-full">
                 {cartProducts.map((item) => (
                   <Item
                     item={item}

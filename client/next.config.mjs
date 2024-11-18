@@ -11,8 +11,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "contents.mediadecathlon.com",
-        port: "",
+        hostname: "**",
       },
     ],
   },
