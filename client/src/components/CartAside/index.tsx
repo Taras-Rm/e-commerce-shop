@@ -76,11 +76,11 @@ function CartAside({ isShowed, close }: CartAsideProps) {
                 </div>
                 <Link
                   href={URLS.cart}
+                  onClick={close}
                   className="block text-center bg-[#89C647] text-[#333333] py-[12px] px-[20px] uppercase text-[13px] font-semibold mb-[10px] w-full"
                 >
                   Check cart
                 </Link>
-
                 <button className="bg-[#89C647] text-[#333333] py-[12px] px-[20px] uppercase text-[13px] font-semibold w-full">
                   Order
                 </button>
