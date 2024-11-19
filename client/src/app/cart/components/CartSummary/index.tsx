@@ -10,7 +10,7 @@ function CartSummary() {
       <DetailItem fieldName="Summary" value="111$" />
       <DetailItem fieldName="Delivery" value="New Post" />
       <div className="px-[10px] py-[15px] flex items-center justify-between font-semibold mb-[15px]">
-        <span className="font-bold text-[18px]">Total</span>
+        <span className="font-medium text-[18px]">Total</span>
         <span className="text-[23px] text-[#89C647]">111 $</span>
       </div>
       <button className="bg-[#89C647] text-[#333333] py-[12px] px-[20px] uppercase text-[13px] font-semibold w-full">
