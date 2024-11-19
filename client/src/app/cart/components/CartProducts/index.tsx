@@ -1,7 +1,12 @@
 import React from "react";
 import CartProductItem from "./CartProductItem/CartProductItem";
+import { CartItem } from "@/types/types";
 
-function CartProducts() {
+interface CartProductsProps {
+  cartProducts: CartItem[];
+}
+
+function CartProducts({ cartProducts }: CartProductsProps) {
   return (
     <div>
       <div className="grid grid-cols-12 text-[15px] uppercase font-medium pb-[20px] border-b-2 border-[#e9e9e9] text-center">
@@ -11,8 +16,15 @@ function CartProducts() {
         <div className="col-span-3 px-[10px]">Interim Summary</div>
       </div>
       <div>
-        <CartProductItem name="Hello tom" price={100} amount={12} />
-        <CartProductItem name="Hello bob" price={45} amount={2} />
+        {cartProducts.map((product) => (
+          <CartProductItem
+            key={product.id}
+            name={product.name}
+            price={product.price}
+            amount={product.count}
+            imageUrl={product.imageUrl}
+          />
+        ))}
       </div>
     </div>
   );
